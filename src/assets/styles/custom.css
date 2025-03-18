@@ -1,0 +1,115 @@
+.csvlink {
+    color: var(--color-icon);
+}
+
+.pickphoneinput {
+    margin-left: unset;
+    font-size: large;
+    /* width: 90%; */
+    margin-top: 2px;
+}
+
+.pickphone {
+    margin-top: 0.8rem;
+}
+
+.special-label {
+    display: none;
+}
+
+:root {
+    --input-color-bd: var(--mantine-color-gray-4);
+    --input-color-bg: var(--mantine-color-white);
+    --font-size: var(--mantine-font-size-md, var(--mantine-font-size-md, var(--mantine-font-size-sm)));
+    --input-scale: calc(2.625rem* var(--mantine-scale));
+    --input-error-size: calc(var(--mantine-font-size-md) - calc(0.125rem* var(--mantine-scale)));
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --input-color-bd: var(--mantine-color-dark-4);
+        --input-color-bg: var(--mantine-color-dark-6);
+    }
+}
+
+@media screen and (max-device-width: 31.25em) {
+    :root {
+        --font-size: var(--mantine-font-size-xs, var(--mantine-font-size-xs, var(--mantine-font-size-sm)));
+        --input-scale: calc(1.875rem* var(--mantine-scale));
+        --input-width: 100%;
+        --input-error-size: calc(var(--mantine-font-size-xs) - calc(0.125rem* var(--mantine-scale)));
+    }
+}
+
+.iti__tel-input {
+    width: 12rem;
+    min-height: var(--input-scale);
+    line-height: calc(var(--input-scale) - calc(0.125rem* var(--mantine-scale)));
+    border-radius: var(--mantine-radius-default);
+    border: calc(0.0625rem* var(--mantine-scale)) solid var(--input-color-bd);
+    background-color: var(--input-color-bg);
+    font-size: var(--font-size);
+}
+
+.iti__selected-dial-code {
+    font-size: var(--mantine-font-size-xs, var(--mantine-font-size-xs, var(--mantine-font-size-sm)));
+}
+
+.intl-phone-error input {
+    border-color: var(--mantine-color-error);
+}
+
+.intl-phone-error p {
+    margin: 0;
+    color: var(--mantine-color-error);
+    font-size: var(--input-error-size, calc(var(--mantine-font-size-sm) - calc(0.125rem* var(--mantine-scale))));
+}
+
+.pickphoneinput {
+    --input-padding: calc(var(--input-height) / 3);
+    --input-height: calc(2.25rem* var(--mantine-scale));
+    font-size: var(--mantine-font-size-sm);
+    color: var(--input-color);
+    width: 100%;
+    height: var(--input-height);
+    min-height: var(--input-height);
+    line-height: calc(var(--input-height) - calc(0.125rem* var(--mantine-scale)));
+    border-radius: var(--mantine-radius-default);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--mantine-color-dark-4);
+    appearance: none;
+    background-color: var(--mantine-color-dark-6);
+    padding-inline-start: calc(var(--input-padding)/2);
+    padding-inline-end: calc(var(--input-padding)/2);
+    cursor: pointer;
+    font-family: var(--input-font-family, var(--mantine-font-family));
+}
+
+.pickphoneinput:focus {
+    border-color: var(--mantine-primary-color-filled);
+    outline: none;
+}
+
+@media (prefers-color-scheme: light) {
+    .pickphoneinput {
+        border-color: var(--mantine-color-gray-4);
+        background-color: var(--mantine-color-white);
+    }
+}
+
+.table-label {
+    font-size: var(--font-size)
+}
+
+.white-space-normal .mantine-Button-label {
+    white-space: normal;
+}
+
+.hfht-programs {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 1rem;
+    /* margin: 1rem; */
+    /* gap: 1rem; */
+}
