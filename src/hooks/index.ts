@@ -1,5 +1,5 @@
 export * from './useSettings'
-
+export * from './useWebVisits'
 
 export * from './useDownload'
 export * from './useEligibility'

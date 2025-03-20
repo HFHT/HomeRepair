@@ -1,5 +1,5 @@
 //@ts-ignore
-import { APILoader, PlacePicker } from '@googlemaps/extended-component-library/react';
+import { PlacePicker } from '@googlemaps/extended-component-library/react';
 import './../assets/styles/google.css'
 import { getAddressComponent } from '../utils';
 
@@ -19,7 +19,6 @@ export function GoogleAutocomplete({ placeholder = 'Address...', countries = ['u
 
   return (
     <div>
-      <APILoader apiKey={import.meta.env.VITE_GOOGLE_APIKEY} solutionChannel="GMP_GCC_placepicker_v1" />
       <div className="google-container">
         <PlacePicker country={countries} placeholder={placeholder} onPlaceChange={handlePlaceChange} />
         <div className="google-result">

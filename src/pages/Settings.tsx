@@ -13,12 +13,10 @@ export function Settings() {
 
     return (
         <Paper>
-            <Center>
-                <Stack p='xs' gap='xs' align='stretch' justify='center'>
-                    <Title order={3}>Settings</Title>
-                    <CSVLink data={webcsv} filename={'HomeRepairWebUsage.csv'}><Button>Download Web Usage</Button></CSVLink>
-                </Stack>
-            </Center>
+            <Title ml={8} order={3}>Settings</Title>
+            <Stack p='xs' gap='xs' align='stretch' justify='center'>
+                <CSVLink data={webcsv} filename={'HomeRepairWebUsage.csv'}><Button>Download Web Usage</Button></CSVLink>
+            </Stack>
         </Paper>
     )
 }

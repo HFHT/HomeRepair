@@ -56,3 +56,16 @@ export type MainContextParamType = {
     nosave: boolean,
     noemail: boolean
 }
+
+export type WebVisitsType = {
+    _id: string,
+    visits: WebVisitType[]
+}
+
+export type WebVisitType = {
+    key: number,
+    answers: any,
+    eligiblePrograms: string[],
+    notEligibleReason: { title: string, altPgm: string | undefined }[],
+    program: string
+}

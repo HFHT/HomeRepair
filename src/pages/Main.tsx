@@ -1,4 +1,4 @@
-import { Address, Downloads, Eligibility, HomeInfo, Income, Inquiries, MilitarySenior, New, NotEligible, RepairForm, Repairs, Settings, Start, ThankYou } from ".";
+import { Address, Downloads, Eligibility, HomeInfo, Income, Inquiries, MilitarySenior, New, NotEligible, RepairForm, Repairs, Settings, Start, ThankYou, WebHits } from ".";
 import { Home } from "./Home";
 
 export function Main() {
@@ -8,7 +8,7 @@ export function Main() {
             <Inquiries />
             <New />
             <Settings />
-
+            <WebHits />
 
             <Address />
             <HomeInfo />

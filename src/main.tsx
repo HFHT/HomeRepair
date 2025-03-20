@@ -10,6 +10,9 @@ import { StrictMode } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { TopLevelError } from './components';
 import { MainContextProvider } from './context/MainContext';
+//@ts-ignore
+import { APILoader } from '@googlemaps/extended-component-library/react';
+
 // import(`//maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_APIKEY}&language=en&libraries=places&v=weekly`)
 
 const theme = createTheme({
@@ -25,12 +28,13 @@ const theme = createTheme({
   try {
     ReactDOM.createRoot(document.getElementById('root')!).render(
       <StrictMode >
+        <APILoader apiKey={import.meta.env.VITE_GOOGLE_APIKEY} solutionChannel="GMP_GCC_placepicker_v1" />
         <MantineProvider theme={theme} forceColorScheme={window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'}>
-            <ErrorBoundary FallbackComponent={TopLevelError} onError={() => console.log('Top Level Error Boundary')}>
-              <MainContextProvider props={{ params: new URLSearchParams(window.location.search) }}>
-                <App props={null} />
-              </MainContextProvider>
-            </ErrorBoundary>
+          <ErrorBoundary FallbackComponent={TopLevelError} onError={() => console.log('Top Level Error Boundary')}>
+            <MainContextProvider props={{ params: new URLSearchParams(window.location.search) }}>
+              <App props={null} />
+            </MainContextProvider>
+          </ErrorBoundary>
         </MantineProvider>
       </StrictMode>
     )

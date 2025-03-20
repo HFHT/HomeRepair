@@ -1,7 +1,7 @@
 export * from './Inquiries'
 export * from './New'
 export * from './Settings'
-
+export * from './WebHits'
 
 
 
