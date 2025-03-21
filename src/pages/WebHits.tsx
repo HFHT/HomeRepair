@@ -1,4 +1,4 @@
-import { Paper, Stack, Table, TableData, Text, Title } from "@mantine/core"
+import { Paper, Stack, Table, Text, Title } from "@mantine/core"
 import { useWebVisits } from "../hooks";
 import { GoogleAutocomplete } from "../components";
 

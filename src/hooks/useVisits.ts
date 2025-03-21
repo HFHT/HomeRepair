@@ -4,6 +4,7 @@ import { useErrorBoundary } from "react-error-boundary"
 import { getMongoItem, putMongoItem } from "../services"
 import { CONST_DB, CONST_DB_VISITS, uniqueKey } from "../utils"
 import { MainContext } from "../context/MainContext"
+import { WebVisitsType } from "../types"
 
 type VisitsType = {
     _id: string,
@@ -11,6 +12,7 @@ type VisitsType = {
 }
 type VisitType = {
     key: number | string,
+    date?: string | undefined, 
     answers: {},
     eligiblePrograms: any,
     notEligibleReason: any,
@@ -22,8 +24,21 @@ export function useVisits() {
     const [isBusy, setIsBusy] = useState(false)
     const { showBoundary } = useErrorBoundary()
     const [visit, setVisit] = useState<VisitsType | undefined>(undefined)
+    const [visits, setVisits] = useState<WebVisitsType[] | undefined>(undefined)
     const [sessionKey, setSessionKey] = useState<string | number | undefined>(uniqueKey())
 
+    const getVisits = async () => {
+        try {
+            setIsBusy(true)
+            let allVisits: WebVisitsType[] = await getMongoItem({ db: CONST_DB, collection: CONST_DB_VISITS })
+            console.log(allVisits)
+            setVisits(allVisits)
+            setIsBusy(false)
+        } catch (error) {
+            setIsBusy(false)
+            showBoundary(error)
+        }
+    }
     const getVisit = async (_id: string) => {
         // if (!sessionKey) { console.warn('useVisits-no-fingerprint', sessionKey); return }
         try {
@@ -75,5 +90,5 @@ export function useVisits() {
     //     getVisit()
     // }, [fingerPrint])
 
-    return { visit, fingerPrint, getVisit, putVisit, isBusy } as const
+    return { visit, visits, fingerPrint, getVisit, getVisits, putVisit, isBusy } as const
 }

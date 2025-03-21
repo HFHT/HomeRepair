@@ -1,3 +1,4 @@
+export * from './useHome'
 export * from './useSettings'
 export * from './useWebVisits'
 
