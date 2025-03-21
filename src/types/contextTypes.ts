@@ -64,6 +64,7 @@ export type WebVisitsType = {
 
 export type WebVisitType = {
     key: number,
+    date?: string | undefined,
     answers: any,
     eligiblePrograms: string[],
     notEligibleReason: { title: string, altPgm: string | undefined }[],

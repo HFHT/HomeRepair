@@ -39,9 +39,10 @@ export function useWebVisits() {
 
     const tableData: TableData = {
         caption: theCaption(),
-        head: ['Program', 'Eligibility', 'Answers'],
+        head: ['Date', 'Program', 'Eligibility', 'Answers'],
         body: !webVisits || !webVisits[0] ? [] :
             webVisits[0].visits.map((vm) => [
+                vm?.date ? vm.date : '',
                 vm.program,
                 vm.eligiblePrograms.join(', ') || vm.notEligibleReason.map((em) => em.title).join(', '),
                 Object.entries(vm.answers).map(([key, value]) => `${key}: ${value}`).join(', ')
