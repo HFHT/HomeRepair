@@ -2,9 +2,9 @@ import { useContext, useEffect, useState } from "react"
 import { useFingerPrint } from "."
 import { useErrorBoundary } from "react-error-boundary"
 import { getMongoItem, putMongoItem } from "../services"
-import { CONST_DB, CONST_DB_VISITS, uniqueKey } from "../utils"
+import { CONST_DB, CONST_DB_VISITS, CONST_DB_WEBHITS, uniqueKey } from "../utils"
 import { MainContext } from "../context/MainContext"
-import { WebVisitsType } from "../types"
+import { WebHitsType, WebVisitsType } from "../types"
 
 type VisitsType = {
     _id: string,
@@ -12,7 +12,7 @@ type VisitsType = {
 }
 type VisitType = {
     key: number | string,
-    date?: string | undefined, 
+    date?: string | undefined,
     answers: {},
     eligiblePrograms: any,
     notEligibleReason: any,
@@ -25,6 +25,7 @@ export function useVisits() {
     const { showBoundary } = useErrorBoundary()
     const [visit, setVisit] = useState<VisitsType | undefined>(undefined)
     const [visits, setVisits] = useState<WebVisitsType[] | undefined>(undefined)
+    const [webHits, setWebHits] = useState<WebHitsType[] | undefined>(undefined)
     const [sessionKey, setSessionKey] = useState<string | number | undefined>(uniqueKey())
 
     const getVisits = async () => {
@@ -85,10 +86,23 @@ export function useVisits() {
         setVisit(thisVisit)
         putMongoItem({ db: CONST_DB, collection: CONST_DB_VISITS, _id: thisVisit._id, data: { ...thisVisit } })
     }
+
+    const getWebHits = async () => {
+        try {
+            setIsBusy(true)
+            let allWebHits: WebHitsType[] = await getMongoItem({ db: CONST_DB, collection: CONST_DB_WEBHITS })
+            console.log(allWebHits)
+            setWebHits(allWebHits)
+            setIsBusy(false)
+        } catch (error) {
+            setIsBusy(false)
+            showBoundary(error)
+        }
+    }
     // useEffect(() => {
     //     if (!fingerPrint) return
     //     getVisit()
     // }, [fingerPrint])
 
-    return { visit, visits, fingerPrint, getVisit, getVisits, putVisit, isBusy } as const
+    return { visit, visits, webHits, fingerPrint, getVisit, getVisits, putVisit, getWebHits, isBusy } as const
 }

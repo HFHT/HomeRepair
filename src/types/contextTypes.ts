@@ -70,3 +70,12 @@ export type WebVisitType = {
     notEligibleReason: { title: string, altPgm: string | undefined }[],
     program: string
 }
+
+export type WebHitsType = {
+    _id: string,
+    hits: WebHitType[]
+}
+export type WebHitType = {
+    time: string,
+    fingerprint: string | number
+}

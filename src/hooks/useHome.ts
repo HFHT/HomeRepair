@@ -9,7 +9,7 @@ import { useVisits } from ".";
 
 export function useHome() {
     const { destination } = useContext(MainContext)
-    const { visits, getVisits } = useVisits()
+    const { visits, getVisits, webHits, getWebHits } = useVisits()
     const [address, setTheAddress] = useState<GoogleAddressType | undefined>()
     const [webVisits, setWebVisits] = useState<WebVisitsType[] | undefined>(undefined)
 
@@ -26,6 +26,7 @@ export function useHome() {
 
     useEffect(() => {
         getVisits()
+        getWebHits()
     }, [])
 
     //Clear the Web Visits when the user clicks to another page
@@ -67,6 +68,27 @@ export function useHome() {
 
     }, [visits])
 
+    const tableWebHits: TableData = useMemo(() => {
+        let rows: any = []
+        if (webHits) {
+            rows = []
+            webHits.slice().reverse().forEach((vs) => {
+                const row = vs.hits.map((vm, idx) => [
+                    vs._id,
+                    idx + 1,
+                    vm.time,
+                    vm.fingerprint
+                ])
+                rows = [...rows, ...row]
+            })
+        }
+        return {
+            caption: theCaption(),
+            head: ['Date', 'Hit', 'Time', 'Fingerprint'],
+            body: rows
+        }
+    }, [webHits])
+
     // const tableData: TableData = {
     //     caption: theCaption(),
     //     head: ['Date', 'Program', 'Eligibility', 'Answers'],
@@ -83,5 +105,5 @@ export function useHome() {
     //         ))
     // }
 
-    return { address, destination, setAddress, tableData, webVisits } as const
+    return { address, destination, setAddress, tableData, tableWebHits, webVisits } as const
 }
